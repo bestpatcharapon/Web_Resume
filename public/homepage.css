@@ -31,6 +31,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 4rem;
 }
 
 body {
@@ -59,7 +60,7 @@ body {
   gap: 0.5rem;
   justify-content: center;
   padding: 0.5rem;
-  background-color: var(--color-card);
+  background-color: rgba(242, 240, 236, 0.9);
   border: 1px solid var(--color-card-border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-sm);
@@ -67,6 +68,12 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-bottom: var(--spacing-md);
+  position: fixed;
+  top: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  backdrop-filter: blur(10px);
 }
 
 .nav-link {
@@ -107,6 +114,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
+  padding-top: 3.5rem;
 }
 
 /* Profile Info Section */
@@ -185,13 +193,10 @@ body {
   border: 3px solid transparent;
   background:
     linear-gradient(var(--color-card), var(--color-card)) padding-box,
-    linear-gradient(
-        135deg,
-        var(--color-accent),
-        var(--color-primary),
-        var(--color-accent)
-      )
-      border-box;
+    linear-gradient(135deg,
+      var(--color-accent),
+      var(--color-primary),
+      var(--color-accent)) border-box;
   box-shadow:
     0 8px 25px rgba(114, 133, 89, 0.2),
     0 0 30px rgba(114, 133, 89, 0.1);
@@ -260,12 +265,10 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    transparent 50%,
-    rgba(61, 56, 48, 0.75) 100%
-  );
+  background: linear-gradient(to bottom,
+      transparent 0%,
+      transparent 50%,
+      rgba(61, 56, 48, 0.75) 100%);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -581,12 +584,10 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
   animation: shimmer 2s infinite;
 }
 
@@ -594,6 +595,7 @@ body {
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(100%);
   }
@@ -712,12 +714,10 @@ body {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(
-    to bottom,
-    var(--color-accent) 0%,
-    var(--color-card-border) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(to bottom,
+      var(--color-accent) 0%,
+      var(--color-card-border) 50%,
+      transparent 100%);
 }
 
 .timeline-item {
@@ -752,12 +752,14 @@ body {
 }
 
 @keyframes pulse {
+
   0%,
   100% {
     box-shadow:
       0 0 0 4px var(--color-bg),
       0 0 0 8px rgba(114, 133, 89, 0.2);
   }
+
   50% {
     box-shadow:
       0 0 0 4px var(--color-bg),
@@ -859,10 +861,12 @@ body {
 }
 
 @keyframes blink-cursor {
+
   from,
   to {
     border-right-color: #5c6f3d;
   }
+
   50% {
     border-right-color: transparent;
   }

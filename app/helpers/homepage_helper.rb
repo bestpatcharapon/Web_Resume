@@ -3,50 +3,54 @@
 module HomepageHelper
   def tech_skills
     %w[
+      Python
+      JavaScript
+      PHP
       Ruby
       Rails
-      JavaScript
-      TypeScript
+      React
       HTML/CSS
       PostgreSQL
       MySQL
+      SQLite
       Git
-      Docker
-      Cypress
       Bruno
-      RSpec
+      Postman
+      Cypress
+      Trello
+      AzureDevOps
     ]
   end
 
   def experiences
     [
       {
+        period: "Nov 2025 - Mar 2026",
+        title: "Banana AI Work Assistant (R&D)",
+        company: "Test Engineer Intern · Banana Coding Co., Ltd.",
+        description: "Web-based AI assistant system integrated with MCP and external LLMs. Designed and executed test cases for MCP tools and web assistant features. Performed manual testing, contract testing, and API validation (Postman / JSON Schema). Validated system workflows (Azure DevOps, Banana Office, Pastel – read-only integration). Conducted regression testing and continuous validation to ensure system stability before release.",
+        tags: ["Manual Testing", "API Validation", "Postman", "Regression Testing"]
+      },
+      {
+        period: "Jan 2026",
+        title: "CCT MIS Development",
+        company: "Test Engineer Intern · Banana Coding Co., Ltd.",
+        description: "Web-based Church Management Information System. Performed end-to-end testing across multiple modules. Executed functional and regression testing, and reported defects. Tracked test cases and progress via Trello.",
+        tags: ["E2E Testing", "Functional Testing", "Trello", "Defect Reporting"]
+      },
+      {
+        period: "Nov 2025 - Mar 2026",
+        title: "SmartCheck",
+        company: "Test Engineer Intern · Banana Coding Co., Ltd.",
+        description: "Web-based Analytics Dashboard System. Performed end-to-end testing for analytics dashboard tiles (Fleet Comparison, Connectivity, Defect Summary, Vehicle Utilisation). Validated data accuracy, calculations, and percentage metrics against business requirements. Conducted API testing using Bruno, including request/response validation. Executed functional and regression testing for charts and reporting features.",
+        tags: ["E2E Testing", "Bruno", "API Testing", "Dashboard Validation"]
+      },
+      {
         period: "Nov 2024 - Mar 2025",
-        title: "Software Developer Intern",
-        company: "Odds Thailand",
-        description: "Developed and maintained web applications using Ruby on Rails. Collaborated with cross-functional teams to deliver high-quality software solutions.",
-        tags: %w[Ruby Rails PostgreSQL Docker]
-      },
-      {
-        period: "Jun 2024 - Oct 2024",
-        title: "QA Tester Intern",
-        company: "Odds Thailand",
-        description: "Performed manual and automated testing to ensure software quality. Created test cases and documented bugs using industry-standard tools.",
-        tags: %w[Cypress Bruno Manual\ Testing API\ Testing]
-      },
-      {
-        period: "2021 - Present",
-        title: "Computer Engineering Student",
-        company: "University",
-        description: "Studying computer engineering with focus on software development, algorithms, and system design.",
-        tags: %w[Algorithms Data\ Structures OOP]
-      },
-      {
-        period: "2020 - 2021",
-        title: "Self-Learning Developer",
-        company: "Personal Projects",
-        description: "Started learning programming through online courses and building personal projects to develop practical skills.",
-        tags: %w[HTML CSS JavaScript Python]
+        title: "Human Detection System with Edge Computing",
+        company: "Developer · Rajamangala University of Technology Lanna",
+        description: "AI-powered IoT Monitoring System. Developed an AI-based human detection system using ESP32 and Machine Learning on Edge Computing. Implemented real-time monitoring dashboard with automated alert notifications. Validated detection accuracy and system performance through continuous testing. Performed functional testing and system reliability verification before deployment.",
+        tags: ["Python", "Machine Learning", "ESP32", "IoT"]
       }
     ]
   end
@@ -55,7 +59,7 @@ module HomepageHelper
     [
       {
         url: "https://img2.pic.in.th/pic/119910476_1085994998481636_5979345016126014253_n.jpg",
-        alt: "Best Patcharapon - Software Developer"
+        alt: "Best Patcharapon - Test Engineer"
       },
       {
         url: "https://img2.pic.in.th/5f28bf8468995c032c41bee6daf8e65d.jpg",
@@ -72,23 +76,23 @@ module HomepageHelper
     {
       name: "Patcharapon Yoriya",
       nickname: "Best",
-      role: "Software Developer | Software Testing",
+      role: "Test Engineer | Software Developer",
       location: "Chiang Mai, TH",
       email: "Patcharaponyo65@gmail.com",
       birthday: "December 4, 2003",
       faculty: "Computer Engineering",
-      primary_tools: "Ruby on Rails · Bruno · Cypress",
+      primary_tools: "Bruno · Postman · Trello · Cypress",
       github_url: "https://github.com/bestpatcharapon",
-      resume_path: "/bestport.pdf"
+      resume_path: "/Patcharapon_CV.pdf"
     }
   end
 
   def typing_texts
     [
-      "Best Patcharapon",
+      "Hi Everyone",
+      "I'm Best Patcharapon",
+      "Test Engineer",
       "Software Developer",
-      "QA Tester",
-      "Ruby on Rails Developer"
     ]
   end
 end

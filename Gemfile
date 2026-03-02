@@ -28,6 +28,9 @@ gem "jbuilder"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mswin mswin64 mingw x64_mingw jruby ]
 
+# Load environment variables from .env file
+gem "dotenv-rails", groups: [:development, :test]
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 

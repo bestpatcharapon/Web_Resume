@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Best Patcharapon | Software Developer Portfolio</title>
+  <title>Best Patcharapon | Test Engineer & Developer Portfolio</title>
+  <%= csrf_meta_tags %>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -11,6 +12,7 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="/homepage.css">
+  <link rel="stylesheet" href="/chatbot.css">
 </head>
 <body>
   <div class="bento-container">
@@ -38,6 +40,9 @@
     </div>
   </div>
 
+  <!-- Chatbot Widget -->
+  <%= render "homepage/partials/chatbot" %>
+
   <!-- Pass data to JavaScript -->
   <script>
     window.TYPING_TEXTS = <%= raw typing_texts.to_json %>;
@@ -45,5 +50,6 @@
 
   <!-- External JavaScript -->
   <script src="/homepage.js"></script>
+  <script src="/chatbot.js"></script>
 </body>
 </html>

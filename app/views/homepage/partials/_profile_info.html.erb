@@ -6,7 +6,7 @@
       Software Developer | Software Testing
     </p>
     <p class="description">
-      Junior Software Developer & QA Tester with internship experience in full-stack development and software quality assurance. Skilled in building web applications using Ruby on Rails while ensuring product quality through manual and automated testing. Strong foundation in modern development practices and agile methodologies. Actively seeking opportunities to grow as a versatile developer who values both code quality and user experience.
+      Test Engineer with a development background, specializing in software testing and quality assurance. Experienced in manual testing, end-to-end testing, test case design, execution, and defect reporting. Strong understanding of SDLC and Agile practices, with hands-on experience in API validation and dashboard data verification. Technical background in web development using Ruby on Rails and modern web technologies, with strong analytical thinking and problem-solving skills. Passionate about delivering reliable, high-quality software while contributing to development when needed.
     </p>
   </div>
 
@@ -35,7 +35,7 @@
     <%= render "homepage/partials/info_card",
         icon_name: "sparkle",
         title: "Primary Tools",
-        value: "Ruby on Rails · Bruno · Cypress" %>
+        value: "Ruby on Rails · Bruno · Manual Testing" %>
   </div>
 
   <!-- Action Buttons -->
@@ -45,7 +45,12 @@
       GitHub Profile
     <% end %>
 
-    <%= link_to "/bestport.pdf", class: "btn btn-outline", download: true do %>
+    <%= link_to "https://www.linkedin.com/in/patcharapon-yoriya-153459357/", class: "btn btn-primary", target: "_blank", rel: "noopener noreferrer" do %>
+      <%= icon_filled("linkedin", size: 20) %>
+      LinkedIn
+    <% end %>
+
+    <%= link_to "/Patcharapon_CV.pdf", class: "btn btn-primary", download: "Patcharapon_CV.pdf" do %>
       <%= icon("download", size: 20) %>
       Download Resume
     <% end %>
