@@ -1,24 +1,45 @@
 # frozen_string_literal: true
 
 module HomepageHelper
-  def tech_skills
-    %w[
-      Python
-      JavaScript
-      PHP
-      Ruby
-      Rails
-      React
-      HTML/CSS
-      PostgreSQL
-      MySQL
-      SQLite
-      Git
-      Bruno
-      Postman
-      Cypress
-      Trello
-      AzureDevOps
+  def tech_skills_grouped
+    [
+      {
+        category: "Languages",
+        skills: [
+          { name: "Python", icon: "fa-brands fa-python" },
+          { name: "JavaScript", icon: "fa-brands fa-js" },
+          { name: "PHP", icon: "fa-brands fa-php" },
+          { name: "Ruby", icon: "fa-solid fa-gem" },
+          { name: "HTML/CSS", icon: "fa-brands fa-html5" }
+        ]
+      },
+      {
+        category: "Frameworks",
+        skills: [
+          { name: "Ruby on Rails", icon: "fa-solid fa-train-subway" },
+          { name: "React", icon: "fa-brands fa-react" }
+        ]
+      },
+      {
+        category: "Tools • Testing",
+        skills: [
+          { name: "Git", icon: "fa-brands fa-git-alt" },
+          { name: "VS Code", icon: "fa-solid fa-code" },
+          { name: "Bruno", icon: "fa-solid fa-flask" },
+          { name: "Postman", icon: "fa-solid fa-paper-plane" },
+          { name: "Cypress", icon: "fa-solid fa-vial" },
+          { name: "Trello", icon: "fa-brands fa-trello" },
+          { name: "Azure DevOps", icon: "fa-brands fa-microsoft" }
+        ]
+      },
+      {
+        category: "Databases",
+        skills: [
+          { name: "PostgreSQL", icon: "fa-solid fa-database" },
+          { name: "MySQL", icon: "fa-solid fa-database" },
+          { name: "SQLite", icon: "fa-solid fa-database" }
+        ]
+      }
     ]
   end
 
@@ -55,44 +76,12 @@ module HomepageHelper
     ]
   end
 
-  def profile_images
-    [
-      {
-        url: "https://img2.pic.in.th/pic/119910476_1085994998481636_5979345016126014253_n.jpg",
-        alt: "Best Patcharapon - Test Engineer"
-      },
-      {
-        url: "https://img2.pic.in.th/5f28bf8468995c032c41bee6daf8e65d.jpg",
-        alt: "Coding"
-      },
-      {
-        url: "https://img2.pic.in.th/d835428a4f951c34e26b8008ec0d958a.jpg",
-        alt: "Working"
-      }
-    ]
-  end
-
-  def personal_info
-    {
-      name: "Patcharapon Yoriya",
-      nickname: "Best",
-      role: "Test Engineer | Software Developer",
-      location: "Chiang Mai, TH",
-      email: "Patcharaponyo65@gmail.com",
-      birthday: "December 4, 2003",
-      faculty: "Computer Engineering",
-      primary_tools: "Bruno · Postman · Trello · Cypress",
-      github_url: "https://github.com/bestpatcharapon",
-      resume_path: "/Patcharapon_CV.pdf"
-    }
-  end
-
   def typing_texts
     [
       "Hi Everyone",
       "I'm Best Patcharapon",
       "Test Engineer",
-      "Software Developer",
+      "Software Developer"
     ]
   end
 end

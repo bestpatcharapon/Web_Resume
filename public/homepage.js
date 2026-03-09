@@ -142,7 +142,6 @@ const ProfileStack = {
   cards: null,
   dots: null,
   currentIndex: 0,
-  autoRotateTimer: null,
 
   init() {
     this.cards = document.querySelectorAll(".profile-card");
@@ -151,7 +150,6 @@ const ProfileStack = {
     if (!this.cards.length) return;
 
     this.bindEvents();
-    this.startAutoRotate();
   },
 
   bindEvents() {
@@ -160,7 +158,6 @@ const ProfileStack = {
       card.addEventListener("click", () => {
         if (!card.classList.contains("card-main")) {
           this.updateStack(index);
-          this.resetAutoRotate();
         }
       });
     });
@@ -169,7 +166,6 @@ const ProfileStack = {
     this.dots.forEach((dot, index) => {
       dot.addEventListener("click", () => {
         this.updateStack(index);
-        this.resetAutoRotate();
       });
     });
   },
@@ -194,18 +190,6 @@ const ProfileStack = {
     });
 
     this.currentIndex = newIndex;
-  },
-
-  startAutoRotate() {
-    this.autoRotateTimer = setInterval(() => {
-      const nextIndex = (this.currentIndex + 1) % this.cards.length;
-      this.updateStack(nextIndex);
-    }, CONFIG.profileStack.autoRotateInterval);
-  },
-
-  resetAutoRotate() {
-    clearInterval(this.autoRotateTimer);
-    this.startAutoRotate();
   },
 };
 

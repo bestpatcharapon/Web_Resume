@@ -163,6 +163,7 @@ class ChatbotController < ApplicationController
       { success: false, message: "เกิดข้อผิดพลาด กรุณาลองใหม่ 😅" }
     end
   rescue StandardError => e
-    { success: false, message: "เกิดข้อผิดพลาด: #{e.message}" }
+    Rails.logger.error("Chatbot API error: #{e.message}")
+    { success: false, message: "เกิดข้อผิดพลาด กรุณาลองใหม่ 😅" }
   end
 end

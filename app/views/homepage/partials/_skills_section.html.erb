@@ -39,24 +39,46 @@
       </div>
     </div>
 
-    <!-- Technical Skills -->
-    <div class="card">
+    <!-- Technical Skills - Marquee -->
+    <div class="card marquee-card">
       <div class="card-header">
         <%= icon("terminal", size: 20, color: "#3498db") %>
         Technical Skills
       </div>
-      <div class="search-bar-container">
-        <%= icon("search", size: 18, class: "search-icon") %>
-        <%= tag.input type: "text",
-                      class: "search-input",
-                      placeholder: "Search technologies..." %>
-      </div>
-      <div class="tech-tags">
-        <% tech_skills.each do |skill| %>
-          <span class="tag"><%= skill %></span>
+
+      <div class="marquee-skills-container">
+        <% tech_skills_grouped.each_with_index do |group, idx| %>
+          <div class="marquee-row">
+            <div class="marquee-category-label"><%= group[:category] %></div>
+            <div class="marquee-track-wrapper">
+              <% fill_count = group[:skills].size <= 3 ? 3 : 2 %>
+              <% items_per_set = group[:skills].size * fill_count %>
+              <% duration = (items_per_set * 2.5).round(1) %>
+              <div class="marquee-track <%= idx.even? ? 'scroll-left' : 'scroll-right' %>" style="--marquee-duration: <%= duration %>s">
+                <% 2.times do %>
+                  <div class="marquee-set">
+                    <% fill_count.times do %>
+                      <% group[:skills].each do |skill| %>
+                        <div class="marquee-skill-item">
+                          <div class="marquee-skill-icon">
+                            <i class="<%= skill[:icon] %>"></i>
+                          </div>
+                          <div class="marquee-skill-info">
+                            <span class="marquee-skill-name"><%= skill[:name] %></span>
+                            <span class="marquee-skill-category"><%= group[:category].split('•').first.strip %></span>
+                          </div>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
         <% end %>
       </div>
-      <p class="footer-note">
+
+      <p class="footer-note" style="margin-top: 0.75rem;">
         <%= icon("sparkle", size: 14) %>
         Always learning new technologies
       </p>
