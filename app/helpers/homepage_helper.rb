@@ -4,30 +4,44 @@ module HomepageHelper
   def tech_skills_grouped
     [
       {
-        category: "Languages",
+        category: "Programming & Scripting",
         skills: [
           { name: "Python", icon: "fa-brands fa-python" },
           { name: "JavaScript", icon: "fa-brands fa-js" },
           { name: "PHP", icon: "fa-brands fa-php" },
           { name: "Ruby", icon: "fa-solid fa-gem" },
-          { name: "HTML/CSS", icon: "fa-brands fa-html5" }
+          { name: "HTML", icon: "fa-brands fa-html5" },
+          { name: "CSS", icon: "fa-brands fa-css3-alt" },
+          { name: "Machine Learning", icon: "fa-solid fa-robot" }
         ]
       },
       {
-        category: "Frameworks",
+        category: "Frameworks & Web Technologies",
         skills: [
           { name: "Ruby on Rails", icon: "fa-solid fa-train-subway" },
-          { name: "React", icon: "fa-brands fa-react" }
+          { name: "React", icon: "fa-brands fa-react" },
+          { name: "RESTful APIs", icon: "fa-solid fa-plug" }
         ]
       },
       {
-        category: "Tools • Testing",
+        category: "Testing Methodology",
+        skills: [
+          { name: "Black-box Testing", icon: "fa-solid fa-box" },
+          { name: "Functional Testing", icon: "fa-solid fa-list-check" },
+          { name: "Regression Testing", icon: "fa-solid fa-arrows-rotate" },
+          { name: "E2E Testing", icon: "fa-solid fa-route" },
+          { name: "UAT", icon: "fa-solid fa-user-check" },
+          { name: "API Validation", icon: "fa-solid fa-server" },
+          { name: "Test Case Design", icon: "fa-solid fa-pen-ruler" }
+        ]
+      },
+      {
+        category: "Tools & Platforms",
         skills: [
           { name: "Git", icon: "fa-brands fa-git-alt" },
           { name: "VS Code", icon: "fa-solid fa-code" },
           { name: "Bruno", icon: "fa-solid fa-flask" },
           { name: "Postman", icon: "fa-solid fa-paper-plane" },
-          { name: "Cypress", icon: "fa-solid fa-vial" },
           { name: "Trello", icon: "fa-brands fa-trello" },
           { name: "Azure DevOps", icon: "fa-brands fa-microsoft" }
         ]
@@ -72,6 +86,47 @@ module HomepageHelper
         company: "Developer · Rajamangala University of Technology Lanna",
         description: "AI-powered IoT Monitoring System. Developed an AI-based human detection system using ESP32 and Machine Learning on Edge Computing. Implemented real-time monitoring dashboard with automated alert notifications. Validated detection accuracy and system performance through continuous testing. Performed functional testing and system reliability verification before deployment.",
         tags: ["Python", "Machine Learning", "ESP32", "IoT"]
+      }
+    ]
+  end
+
+  def projects
+    [
+      {
+        title: "Web Resume Portfolio",
+        description: "Personal portfolio website built with Ruby on Rails featuring responsive bento-grid design, interactive profile card stack, animated skill marquee, and AI chatbot integration.",
+        tags: ["Ruby on Rails", "HTML/CSS", "JavaScript", "Responsive Design"],
+        icon: "fa-solid fa-globe",
+        link: "https://github.com/bestpatcharapon/Web_Resume",
+        color: "#728559",
+        image: nil
+      },
+      {
+        title: "Human Detection System",
+        description: "AI-powered IoT monitoring system using ESP32 and Machine Learning on Edge Computing with real-time dashboard and automated alert notifications.",
+        tags: ["Python", "Machine Learning", "ESP32", "IoT"],
+        icon: "fa-solid fa-microchip",
+        link: "https://github.com/bestpatcharapon",
+        color: "#3498db",
+        image: nil
+      },
+      {
+        title: "SmartCheck Dashboard Testing",
+        description: "End-to-end testing for analytics dashboard tiles including Fleet Comparison, Connectivity, and Vehicle Utilisation with API validation using Bruno.",
+        tags: ["E2E Testing", "Bruno", "API Testing", "Dashboard"],
+        icon: "fa-solid fa-chart-line",
+        link: nil,
+        color: "#e67e22",
+        image: "/smartcheck.png"
+      },
+      {
+        title: "CCT MIS Testing",
+        description: "Comprehensive testing of Church Management Information System across multiple modules with functional testing, regression testing, and defect reporting via Trello.",
+        tags: ["E2E Testing", "Functional Testing", "Trello", "Defect Reporting"],
+        icon: "fa-solid fa-building",
+        link: nil,
+        color: "#9b59b6",
+        image: "/CCT.png"
       }
     ]
   end

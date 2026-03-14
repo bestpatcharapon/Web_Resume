@@ -1,0 +1,87 @@
+<section class="projects-section" id="projects">
+  <div class="section-header">
+    <%= icon("folder", size: 24, color: "#728559") %>
+    <h2>Projects <span class="header-count-badge"><%= projects.size %></span></h2>
+  </div>
+  <p class="section-subtitle">Featured projects and contributions</p>
+
+  <div class="projects-track-wrapper">
+    <div class="projects-track">
+      <!-- Original Set -->
+      <div class="projects-set">
+        <% projects.each do |project| %>
+          <div class="project-card card">
+            <div class="project-card-body">
+              <div class="project-card-top">
+                <h3 class="project-title"><%= project[:title] %></h3>
+                <p class="project-description"><%= project[:description] %></p>
+              </div>
+
+              <div class="project-tags">
+                <% project[:tags].each do |tag_name| %>
+                  <span class="tag"><%= tag_name %></span>
+                <% end %>
+              </div>
+
+              <% if project[:link] %>
+                <a href="<%= project[:link] %>" target="_blank" rel="noopener noreferrer" class="project-cta">
+                  View Project <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              <% end %>
+            </div>
+
+            <% if project[:image] %>
+              <div class="project-preview">
+                <img src="<%= project[:image] %>" alt="<%= project[:title] %>" class="project-image" loading="lazy" />
+              </div>
+            <% else %>
+              <div class="project-preview project-preview-icon">
+                <div class="project-icon-large" style="color: <%= project[:color] %>;">
+                  <i class="<%= project[:icon] %>"></i>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+      <!-- Duplicated Set for Infinite Scroll -->
+      <div class="projects-set" aria-hidden="true">
+        <% projects.each do |project| %>
+          <div class="project-card card">
+            <div class="project-card-body">
+              <div class="project-card-top">
+                <h3 class="project-title"><%= project[:title] %></h3>
+                <p class="project-description"><%= project[:description] %></p>
+              </div>
+
+              <div class="project-tags">
+                <% project[:tags].each do |tag_name| %>
+                  <span class="tag"><%= tag_name %></span>
+                <% end %>
+              </div>
+
+              <% if project[:link] %>
+                <a href="<%= project[:link] %>" target="_blank" rel="noopener noreferrer" class="project-cta">
+                  View Project <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              <% end %>
+            </div>
+
+            <% if project[:image] %>
+              <div class="project-preview">
+                <img src="<%= project[:image] %>" alt="<%= project[:title] %>" class="project-image" loading="lazy" />
+              </div>
+            <% else %>
+              <div class="project-preview project-preview-icon">
+                <div class="project-icon-large" style="color: <%= project[:color] %>;">
+                  <i class="<%= project[:icon] %>"></i>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>

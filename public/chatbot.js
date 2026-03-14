@@ -144,8 +144,12 @@ const Chatbot = {
     const avatarClass = sender === "user" ? "user-avatar" : "bot-avatar";
     const avatar = sender === "user" ? userSvg : botSvg;
 
-    // Bot messages get linkified, user messages get escaped
-    const content = sender === "bot" ? this.linkify(this.escapeHtml(text)) : this.escapeHtml(text);
+    let content = this.escapeHtml(text);
+    if (sender === "bot") {
+      content = this.linkify(content);
+      content = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      content = content.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    }
 
     messageDiv.innerHTML = `
       <div class="message-avatar ${avatarClass}">${avatar}</div>

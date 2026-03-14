@@ -238,6 +238,84 @@ const NavigationState = {
 };
 
 /**
+ * Projects Carousel Module
+ * Handles auto-scrolling for the projects horizontal grid
+ */
+const ProjectsCarousel = {
+  grid: null,
+  scrollAmount: 0,
+  autoScrollInterval: null,
+  isHovered: false,
+
+  init() {
+    this.grid = document.querySelector(".projects-grid");
+    if (!this.grid) return;
+
+    this.bindEvents();
+    this.startAutoScroll();
+  },
+
+  bindEvents() {
+    // Pause auto-scroll on hover or touch
+    this.grid.addEventListener("mouseenter", () => {
+      this.isHovered = true;
+    });
+
+    this.grid.addEventListener("mouseleave", () => {
+      this.isHovered = false;
+    });
+
+    this.grid.addEventListener("touchstart", () => {
+      this.isHovered = true;
+    });
+
+    this.grid.addEventListener("touchend", () => {
+      setTimeout(() => {
+        this.isHovered = false;
+      }, 2000); // Resume after a delay on mobile
+    });
+  },
+
+  startAutoScroll() {
+    this.autoScrollInterval = setInterval(() => {
+      if (!this.isHovered) {
+        this.scrollNext();
+      }
+    }, 3000); // Scroll every 3 seconds for more obvious motion
+  },
+
+  scrollNext() {
+    if (!this.grid) return;
+
+    const firstCard = this.grid.querySelector(".project-card");
+    if (!firstCard) return;
+    
+    // Calculate the width of one card + the gap between cards
+    const style = window.getComputedStyle(this.grid);
+    const gap = parseInt(style.gap) || 24; 
+    const scrollStep = firstCard.offsetWidth + gap;
+
+    const maxScroll = this.grid.scrollWidth - this.grid.clientWidth;
+    
+    // Using Math.ceil to prevent sub-pixel issues where it thought it wasn't at the end
+    if (Math.ceil(this.grid.scrollLeft) >= maxScroll - 10) { 
+      // If at the end, snap back to start
+      this.grid.scrollTo({
+        left: 0,
+        behavior: 'smooth'
+      });
+    } else {
+      // Calculate next exact position
+      const nextPosition = this.grid.scrollLeft + scrollStep;
+      this.grid.scrollTo({
+        left: nextPosition,
+        behavior: 'smooth'
+      });
+    }
+  }
+};
+
+/**
  * Initialize all modules when DOM is ready
  */
 document.addEventListener("DOMContentLoaded", () => {
@@ -254,6 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
   SmoothScroll.init();
   ProfileStack.init();
   NavigationState.init();
+  ProjectsCarousel.init();
 });
 
 // Export modules for potential external use
@@ -263,4 +342,5 @@ window.HomepageModules = {
   SmoothScroll,
   ProfileStack,
   NavigationState,
+  ProjectsCarousel,
 };

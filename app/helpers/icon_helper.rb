@@ -116,6 +116,14 @@ module IconHelper
       check_circle: [
         tag.path(d: "M22 11.08V12a10 10 0 1 1-5.93-9.14"),
         tag.polyline(points: "22 4 12 14.01 9 11.01")
+      ],
+      folder: [
+        tag.path(d: "M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z")
+      ],
+      external_link: [
+        tag.path(d: "M15 3h6v6"),
+        tag.path(d: "M10 14 21 3"),
+        tag.path(d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6")
       ]
     }
 
