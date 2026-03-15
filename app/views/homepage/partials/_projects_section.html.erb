@@ -34,12 +34,12 @@
           <% if project[:images] && project[:images].is_a?(Array) %>
             <div class="project-preview project-preview-double">
               <% project[:images].each do |img| %>
-                <img src="<%= img %>" alt="<%= project[:title] %>" class="project-image-half" loading="lazy" />
+                <img src="<%= img %>" alt="<%= project[:title] %>" class="project-image-half clickable-image" loading="lazy" data-title="<%= project[:title] %>" />
               <% end %>
             </div>
           <% elsif project[:image] %>
             <div class="project-preview">
-              <img src="<%= project[:image] %>" alt="<%= project[:title] %>" class="project-image" loading="lazy" />
+              <img src="<%= project[:image] %>" alt="<%= project[:title] %>" class="project-image clickable-image" loading="lazy" data-title="<%= project[:title] %>" />
             </div>
           <% else %>
             <div class="project-preview project-preview-icon">

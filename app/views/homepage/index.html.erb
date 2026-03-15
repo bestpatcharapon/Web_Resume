@@ -46,6 +46,15 @@
   <!-- Chatbot Widget -->
   <%= render "homepage/partials/chatbot" %>
 
+  <!-- Image Lightbox Modal -->
+  <div id="image-lightbox" class="lightbox">
+    <div class="lightbox-container">
+      <span class="lightbox-close">&times;</span>
+      <img src="" alt="" id="lightbox-image" class="lightbox-image" />
+      <p id="lightbox-title" class="lightbox-title"></p>
+    </div>
+  </div>
+
   <!-- Pass data to JavaScript -->
   <script>
     window.TYPING_TEXTS = <%= raw typing_texts.to_json %>;

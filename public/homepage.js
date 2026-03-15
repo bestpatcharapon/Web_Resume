@@ -396,7 +396,58 @@ document.addEventListener("DOMContentLoaded", () => {
   ProfileStack.init();
   NavigationState.init();
   ProjectsSlider.init();
+  ImageLightbox.init();
 });
+
+// Image Lightbox Module
+const ImageLightbox = (() => {
+  const lightboxElement = document.getElementById("image-lightbox");
+  const lightboxImage = document.getElementById("lightbox-image");
+  const lightboxTitle = document.getElementById("lightbox-title");
+  const closeButton = document.querySelector(".lightbox-close");
+
+  const init = () => {
+    // Add click listeners to all clickable images
+    const clickableImages = document.querySelectorAll(".clickable-image");
+    clickableImages.forEach((img) => {
+      img.addEventListener("click", openLightbox);
+    });
+
+    // Close button
+    closeButton.addEventListener("click", closeLightbox);
+
+    // Close when clicking outside the image
+    lightboxElement.addEventListener("click", (e) => {
+      if (e.target === lightboxElement) {
+        closeLightbox();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        closeLightbox();
+      }
+    });
+  };
+
+  const openLightbox = (e) => {
+    const img = e.target;
+    lightboxImage.src = img.src;
+    lightboxTitle.textContent = img.getAttribute("data-title") || "Image";
+    lightboxElement.classList.add("active");
+    document.body.style.overflow = "hidden"; // Prevent scrolling
+  };
+
+  const closeLightbox = () => {
+    lightboxElement.classList.remove("active");
+    document.body.style.overflow = "auto"; // Allow scrolling again
+  };
+
+  return {
+    init,
+  };
+})();
 
 // Export modules for potential external use
 window.HomepageModules = {
@@ -406,4 +457,5 @@ window.HomepageModules = {
   ProfileStack,
   NavigationState,
   ProjectsSlider,
+  ImageLightbox,
 };
