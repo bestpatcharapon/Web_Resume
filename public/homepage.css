@@ -978,53 +978,26 @@ body {
 }
 
 
-.projects-track-wrapper {
-  overflow: hidden;
-  position: relative;
+.projects-carousel-container {
   width: 100%;
-  padding: var(--spacing-md) 0;
-  
-  /* Soft gradient fade on the edges for a polished look */
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 5%,
-    black 95%,
-    transparent
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 5%,
-    black 95%,
-    transparent
-  );
+  position: relative;
+  padding: var(--spacing-sm) 0;
 }
 
 .projects-track {
   display: flex;
-  width: fit-content;
-  /* CSS Animation for smooth endless scrolling */
-  animation: projects-scroll var(--projects-marquee-duration, 30s) linear infinite;
   gap: var(--spacing-md);
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  padding-bottom: var(--spacing-md);
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
-.projects-track:hover {
-  animation-play-state: paused;
-}
-
-.projects-set {
-  display: flex;
-  gap: var(--spacing-md);
-}
-
-@keyframes projects-scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-50% - (var(--spacing-md) / 2))); 
-  }
+/* Hide scrollbar for Chrome, Safari and Opera */
+.projects-track::-webkit-scrollbar {
+  display: none;
 }
 
 .project-card {
@@ -1039,10 +1012,39 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   min-height: 380px;
 
-  /* Flex item settings for the horizontal slider */
+  /* Setup sizes: show 3 cards on large screens */
   flex: 0 0 auto;
-  width: 400px;
-  /* Set a fixed width for the cards */
+  width: calc((100% - (var(--spacing-md) * 2)) / 3);
+  scroll-snap-align: start;
+}
+
+/* Dots navigation container */
+.projects-nav-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: var(--spacing-md);
+}
+
+.project-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(114, 133, 89, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  padding: 0;
+}
+
+.project-dot:hover {
+  background-color: rgba(114, 133, 89, 0.6);
+}
+
+.project-dot.active {
+  background-color: var(--color-accent);
+  transform: scale(1.2);
 }
 
 @media (max-width: 768px) {
@@ -1069,6 +1071,52 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
+}
+
+.project-title-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.project-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  background-color: rgba(114, 133, 89, 0.08); /* Very subtle accent background */
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid rgba(114, 133, 89, 0.15);
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--color-accent); /* Matches the exact font color */
+  animation: pulse-status-dot 3s ease-in-out infinite;
+}
+
+@keyframes pulse-status-dot {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+/* Specific styling for 'Doing' state */
+.project-status.status-doing {
+  color: #d97706;
+  background-color: rgba(217, 119, 6, 0.08);
+  border-color: rgba(217, 119, 6, 0.15);
+}
+
+.project-status.status-doing .status-dot {
+  background-color: #d97706;
 }
 
 .project-title {
@@ -1153,6 +1201,33 @@ body {
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
+.project-preview-double {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.project-image-half {
+  width: calc(50% - 0.25rem);
+  height: 200px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  border-radius: 12px;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.1),
+    0 1px 4px rgba(0, 0, 0, 0.06);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.project-card:hover .project-image-half {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.12),
+    0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
 .project-card:hover .project-image {
   transform: translateY(-4px) scale(1.02);
   box-shadow:
@@ -1209,7 +1284,8 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(114, 133, 89, 0.15); /* Light accent background */
+  background-color: rgba(114, 133, 89, 0.15);
+  /* Light accent background */
   color: var(--color-accent);
   font-size: 0.875rem;
   font-weight: 600;

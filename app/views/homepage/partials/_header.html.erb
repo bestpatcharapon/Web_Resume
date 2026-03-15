@@ -1,21 +1,13 @@
 <header class="header">
-  <%= link_to "#about", class: "nav-link active" do %>
-    <%= icon("user") %>
-    About
-  <% end %>
-
-  <%= link_to "#skills", class: "nav-link" do %>
-    <%= icon("code") %>
-    Skills
-  <% end %>
-
-  <%= link_to "#projects", class: "nav-link" do %>
-    <%= icon("folder") %>
-    Projects
-  <% end %>
-
-  <%= link_to "#experience", class: "nav-link" do %>
-    <%= icon("briefcase") %>
-    Experience
+  <% [
+    { id: "about", icon: "user", label: "About", active: true },
+    { id: "skills", icon: "code", label: "Skills", active: false },
+    { id: "projects", icon: "folder", label: "Projects", active: false },
+    { id: "experience", icon: "briefcase", label: "Experience", active: false }
+  ].each do |link| %>
+    <%= link_to "##{link[:id]}", class: "nav-link #{'active' if link[:active]}" do %>
+      <%= icon(link[:icon]) %>
+      <%= link[:label] %>
+    <% end %>
   <% end %>
 </header>

@@ -238,80 +238,143 @@ const NavigationState = {
 };
 
 /**
- * Projects Carousel Module
- * Handles auto-scrolling for the projects horizontal grid
+ * Projects Slider Module
+ * Handles dot navigation and scroll snapping for projects
  */
-const ProjectsCarousel = {
-  grid: null,
-  scrollAmount: 0,
-  autoScrollInterval: null,
-  isHovered: false,
+const ProjectsSlider = {
+  track: null,
+  cards: null,
+  dotsContainer: null,
+  dots: [],
+  totalPages: 0,
+  cardsPerPage: window.innerWidth > 768 ? 3 : 1,
 
   init() {
-    this.grid = document.querySelector(".projects-grid");
-    if (!this.grid) return;
+    this.track = document.getElementById("projects-track");
+    this.dotsContainer = document.getElementById("projects-nav-dots");
+    
+    if (!this.track || !this.dotsContainer) return;
+    
+    this.cards = this.track.querySelectorAll(".project-card");
+    if (this.cards.length === 0) return;
 
-    this.bindEvents();
-    this.startAutoScroll();
+    // Use a small timeout to let CSS layout calculate widths properly
+    setTimeout(() => {
+      this.setupDots();
+      this.bindEvents();
+      this.updateActiveDot();
+    }, 100);
+  },
+
+  setupDots() {
+    this.dotsContainer.innerHTML = "";
+    this.dots = [];
+    
+    // Remove any existing placeholders from previous calculations
+    const existingPlaceholders = this.track.querySelectorAll(".project-card-placeholder");
+    existingPlaceholders.forEach(el => el.remove());
+
+    this.cardsPerPage = window.innerWidth > 768 ? 3 : 1;
+    this.totalPages = Math.ceil(this.cards.length / this.cardsPerPage);
+    
+    if (this.totalPages <= 1) return;
+
+    // Append invisible placeholder cards to pad the final page so it scrolls cleanly
+    const remainder = this.cards.length % this.cardsPerPage;
+    if (remainder > 0) {
+      const placeholdersNeeded = this.cardsPerPage - remainder;
+      for (let i = 0; i < placeholdersNeeded; i++) {
+        const placeholder = document.createElement("div");
+        placeholder.className = "project-card project-card-placeholder";
+        placeholder.style.visibility = "hidden";
+        placeholder.style.border = "none";
+        placeholder.style.boxShadow = "none";
+        placeholder.style.background = "transparent";
+        this.track.appendChild(placeholder);
+      }
+    }
+
+    // Save the full list of cards (including placeholders) for accurate scroll measurements
+    this.displayCards = this.track.querySelectorAll(".project-card");
+
+    for (let i = 0; i < this.totalPages; i++) {
+      const dot = document.createElement("button");
+      dot.className = "project-dot";
+      dot.setAttribute("aria-label", `Go to page ${i + 1}`);
+      if (i === 0) dot.classList.add("active");
+      
+      this.dotsContainer.appendChild(dot);
+      this.dots.push(dot);
+      
+      dot.addEventListener("click", () => this.scrollToPage(i));
+    }
   },
 
   bindEvents() {
-    // Pause auto-scroll on hover or touch
-    this.grid.addEventListener("mouseenter", () => {
-      this.isHovered = true;
+    // Re-calculate dots on resize since number of cards per page changes
+    window.addEventListener("resize", () => {
+      clearTimeout(this.resizeTimer);
+      this.resizeTimer = setTimeout(() => {
+        const newCardsPerPage = window.innerWidth > 768 ? 3 : 1;
+        if (this.cardsPerPage !== newCardsPerPage) {
+          this.setupDots();
+        }
+        this.updateActiveDot();
+      }, 250);
     });
 
-    this.grid.addEventListener("mouseleave", () => {
-      this.isHovered = false;
-    });
-
-    this.grid.addEventListener("touchstart", () => {
-      this.isHovered = true;
-    });
-
-    this.grid.addEventListener("touchend", () => {
-      setTimeout(() => {
-        this.isHovered = false;
-      }, 2000); // Resume after a delay on mobile
-    });
-  },
-
-  startAutoScroll() {
-    this.autoScrollInterval = setInterval(() => {
-      if (!this.isHovered) {
-        this.scrollNext();
+    // Update active dot when user scrolls manually
+    this.track.addEventListener("scroll", () => {
+      if (!this.isScrolling) {
+        window.requestAnimationFrame(() => {
+          this.updateActiveDot();
+          this.isScrolling = false;
+        });
+        this.isScrolling = true;
       }
-    }, 3000); // Scroll every 3 seconds for more obvious motion
+    });
   },
 
-  scrollNext() {
-    if (!this.grid) return;
-
-    const firstCard = this.grid.querySelector(".project-card");
-    if (!firstCard) return;
+  scrollToPage(index) {
+    if (this.totalPages <= 1) return;
     
-    // Calculate the width of one card + the gap between cards
-    const style = window.getComputedStyle(this.grid);
-    const gap = parseInt(style.gap) || 24; 
-    const scrollStep = firstCard.offsetWidth + gap;
-
-    const maxScroll = this.grid.scrollWidth - this.grid.clientWidth;
+    // Find the first card of the target page
+    const targetCardIndex = index * this.cardsPerPage;
+    const targetCards = this.displayCards || this.cards;
+    if (!targetCards[targetCardIndex]) return;
     
-    // Using Math.ceil to prevent sub-pixel issues where it thought it wasn't at the end
-    if (Math.ceil(this.grid.scrollLeft) >= maxScroll - 10) { 
-      // If at the end, snap back to start
-      this.grid.scrollTo({
-        left: 0,
-        behavior: 'smooth'
-      });
+    const card = targetCards[targetCardIndex];
+    const scrollLeft = card.offsetLeft - this.track.offsetLeft;
+    
+    this.track.scrollTo({
+      left: scrollLeft,
+      behavior: "smooth"
+    });
+  },
+
+  updateActiveDot() {
+    if (this.totalPages <= 1 || !this.dots.length) return;
+    
+    const trackWidth = this.track.clientWidth;
+    const scrollLeft = this.track.scrollLeft;
+    const maxScroll = this.track.scrollWidth - trackWidth;
+    
+    let activeIndex = 0;
+    
+    // If scrolled to the very end
+    if (Math.abs(scrollLeft - maxScroll) < 10) {
+      activeIndex = this.totalPages - 1;
     } else {
-      // Calculate next exact position
-      const nextPosition = this.grid.scrollLeft + scrollStep;
-      this.grid.scrollTo({
-        left: nextPosition,
-        behavior: 'smooth'
-      });
+      activeIndex = Math.round(scrollLeft / trackWidth);
     }
+
+    this.dots.forEach((dot, index) => {
+      if (index === activeIndex) {
+        dot.classList.add("active");
+      } else {
+        dot.classList.remove("active");
+      }
+    });
   }
 };
 
@@ -332,7 +395,7 @@ document.addEventListener("DOMContentLoaded", () => {
   SmoothScroll.init();
   ProfileStack.init();
   NavigationState.init();
-  ProjectsCarousel.init();
+  ProjectsSlider.init();
 });
 
 // Export modules for potential external use
@@ -342,5 +405,5 @@ window.HomepageModules = {
   SmoothScroll,
   ProfileStack,
   NavigationState,
-  ProjectsCarousel,
+  ProjectsSlider,
 };

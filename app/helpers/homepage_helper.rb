@@ -93,13 +93,13 @@ module HomepageHelper
   def projects
     [
       {
-        title: "Web Resume Portfolio",
+        title: "Web Resume ",
         description: "Personal portfolio website built with Ruby on Rails featuring responsive bento-grid design, interactive profile card stack, animated skill marquee, and AI chatbot integration.",
         tags: ["Ruby on Rails", "HTML/CSS", "JavaScript", "Responsive Design"],
         icon: "fa-solid fa-globe",
-        link: "https://github.com/bestpatcharapon/Web_Resume",
+        link: nil,
         color: "#728559",
-        image: nil
+        image: "/resume.png"
       },
       {
         title: "Human Detection System",
@@ -108,7 +108,7 @@ module HomepageHelper
         icon: "fa-solid fa-microchip",
         link: "https://github.com/bestpatcharapon",
         color: "#3498db",
-        image: nil
+        images: ["/img_3407.png", "/1image.png"]
       },
       {
         title: "SmartCheck Dashboard Testing",
@@ -127,6 +127,25 @@ module HomepageHelper
         link: nil,
         color: "#9b59b6",
         image: "/CCT.png"
+      },
+      {
+        title: "Banana AI Work Assistant",
+        description: "Testing and validation of a web-based AI assistant system integrated with MCP. Designed and executed test cases for new feature rollouts.",
+        tags: ["Manual Testing", "API Validation", "Regression Testing"],
+        icon: "fa-solid fa-robot",
+        link: nil,
+        color: "#f1c40f",
+        images: ["/image copy.png", "/bananaai.png"]
+      },
+      {
+        title: "Alignerr Testing",
+        description: "Testing and evaluating advanced AI/LLM models for code generation, reasoning, and logic to improve model performance and accuracy constraints.",
+        tags: ["AI Testing", "LLM Evaluation", "Prompt Engineering"],
+        icon: "fa-solid fa-brain",
+        link: "https://app.alignerr.com/",
+        color: "#8e44ad",
+        image: "/Aligner.png",
+        status: "Doing"
       }
     ]
   end
