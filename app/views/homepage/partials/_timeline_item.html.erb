@@ -1,7 +1,12 @@
 <div class="timeline-item">
   <div class="timeline-marker <%= 'active' if active %>"></div>
   <div class="timeline-content <%= 'active' if active %>">
-    <div class="timeline-period"><%= experience[:period] %></div>
+    <div class="timeline-period-wrapper">
+      <div class="timeline-period"><%= experience[:period] %></div>
+      <% if experience[:duration].present? %>
+        <span class="timeline-duration"><%= experience[:duration] %></span>
+      <% end %>
+    </div>
     <h3 class="timeline-title"><%= experience[:title] %></h3>
     <p class="timeline-location">
       <i class="fa-solid fa-building"></i>
